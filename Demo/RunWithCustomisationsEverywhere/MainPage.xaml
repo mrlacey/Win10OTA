@@ -1,0 +1,83 @@
+﻿<Page
+    x:Class="RunWithCustomisationsEverywhere.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:RunWithCustomisationsEverywhere"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource PageBackground}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveGroup">
+                <VisualState x:Name="SmallState">
+                    <VisualState.Setters>
+                        <Setter Target="TheSplitView.DisplayMode" Value="Overlay" />
+                        <Setter Target="HomeButton.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="MediumState">
+                    <VisualState.Setters>
+                        <Setter Target="TheSplitView.DisplayMode" Value="CompactOverlay" />
+                        <Setter Target="TheSplitView.IsPaneOpen" Value="True" />
+                        <Setter Target="HomeButton.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="450" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+
+                <VisualState x:Name="LargeState">
+                    <VisualState.Setters>
+                        <Setter Target="TheSplitView.DisplayMode" Value="Inline" />
+                        <Setter Target="TheSplitView.IsPaneOpen" Value="True" />
+                        <Setter Target="HomeButton.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <SplitView x:Name="TheSplitView" >
+            <SplitView.Pane>
+
+                <Grid Background="White" Opacity="0.5">
+                    <StackPanel Margin="8,50,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon Symbol="Comment"/>
+                            <TextBlock Text="SecondPage" Margin="24,0,0,0" FontSize="30" VerticalAlignment="Center" Tapped="SecondPageTapped" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon Symbol="Globe"/>
+                            <TextBlock Text="Globe" Margin="24,0,0,0" FontSize="30" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon Symbol="Message"/>
+                            <TextBlock Text="Message" Margin="24,0,0,0" FontSize="30" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon Symbol="Mail"/>
+                            <TextBlock Text="Mail" Margin="24,0,0,0" FontSize="30" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon Symbol="Admin"/>
+                            <TextBlock Text="Admin" Margin="24,0,0,0" FontSize="30" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Grid>
+<SymbolIcon Symbol="Home" x:Name="HomeButton" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed" Margin="20" Tapped="HomeButtonTapped" />
+                    
+                </Grid>
+            </SplitView.Content>
+
+        </SplitView>
+
+    </Grid>
+</Page>
