@@ -2,19 +2,48 @@
     x:Class="RunWithCustomisationsEverywhere.SecondPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:RunWithCustomisationsEverywhere"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
     <Grid Background="{StaticResource PageBackground}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveGroup">
+                <VisualState x:Name="NarrowState">
+                    <VisualState.Setters>
+                        <Setter Target="TitleText.FontSize" Value="20" />
+                        <Setter Target="ThisText.(RelativePanel.Below)" Value="ThatText" />
+                        <Setter Target="ThisText.(RelativePanel.AlignHorizontalCenterWith)" Value="ThatText" />
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="WideState">
+                    <VisualState.Setters>
+                        <Setter Target="ThisText.(RelativePanel.RightOf)" Value="ThatText" />
+                        <Setter Target="ThisText.(RelativePanel.AlignTopWith)" Value="ThatText" />
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <StackPanel VerticalAlignment="Center">
         <TextBlock HorizontalAlignment="Center"
                    VerticalAlignment="Center"
-                   FontSize="60"
+                   FontSize="40"
                    FontWeight="Bold"
                    TextWrapping="WrapWholeWords"
                    Margin="30"
+                   x:Name="TitleText"
                    TextAlignment="Center"
                    >This is the default second page</TextBlock>
+            <RelativePanel HorizontalAlignment="Center">
+                <TextBlock x:Name="ThatText" FontSize="60" Margin="20">THAT</TextBlock>
+                <TextBlock x:Name="ThisText" RelativePanel.RightOf="ThatText" FontSize="60" Margin="20">THIS</TextBlock>
+            </RelativePanel>
+        </StackPanel>
     </Grid>
 </Page>
